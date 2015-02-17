@@ -6,18 +6,18 @@ Use it at your own risk.
 This example code is in the public domain.
 
 17 feb 2015
-by Lorenzo Romagnoli
+by Lorenzo Romagnoli assisted by Federico Fissore
 */
 
 #include <Bridge.h>
 #include <Process.h>
 
-String ssid = "yourSSIS";
-String psw = "yourPSW!";
+String ssid = "your ssid";
+String psw = "your psw!";
 
 void setup() {
   Serial.begin(9600);  // initialize serial communication
-  while (!Serial);     // do nothing until the serial monitor is opened
+ while (!Serial);     // do nothing until the serial monitor is opened
 
   Serial.println("Starting bridge...\n");
   pinMode(13, OUTPUT);
@@ -26,8 +26,10 @@ void setup() {
   Bridge.begin();
   Serial.println("bridge started");
   Serial.println("Running WIFI configuration scripts, please wait...");
+   Process p;
 
-  Process p;
+  p.runShellCommand("blink-start 100");
+
   p.runShellCommand("uci set wireless.@wifi-iface[0].encryption='psk2'");
   p.runShellCommand("uci set wireless.@wifi-iface[0].mode='sta'");
   p.runShellCommand("uci set wireless.@wifi-iface[0].ssid='" + ssid + "'");
@@ -39,6 +41,8 @@ void setup() {
   p.runShellCommand("uci set network.lan.proto='dhcp'");
   p.runShellCommand("uci commit");
   p.runShellCommand("/etc/init.d/network restart");
+  p.runShellCommand("blink-stop");
+
 
   Serial.println("WIFI configuration finished... just wait for the white led to show up!");
 
