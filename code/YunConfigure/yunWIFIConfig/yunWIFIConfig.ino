@@ -12,8 +12,8 @@ by Lorenzo Romagnoli
 #include <Bridge.h>
 #include <Process.h>
 
-String ssid = "OfficineArduino";
-String psw = "P3rmanent!";
+String ssid = "yourSSIS";
+String psw = "yourPSW!";
 
 void setup() {
   Serial.begin(9600);  // initialize serial communication
