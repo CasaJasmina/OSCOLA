@@ -1,5 +1,5 @@
-const String yunName="arduino";
-const String yunPsw="arduino";
-const String wifissid="your SSID";
-const String wifipsw="your PSW";
-const String wifiAPname="myArduinoYun"; //this is the name of the access point you want the yun to create if somethings goes wrong with the connection to the wifi
+const String yunName="oscola";
+const String yunPsw="oscola1234";
+const String wifissid="OfficineArduino";
+const String wifipsw="P3rmanent!";
+const String wifiAPname="oscola1234"; //this is the name of the access point you want the yun to create if somethings goes wrong with the connection to the wifi
