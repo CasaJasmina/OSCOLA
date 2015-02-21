@@ -36,10 +36,12 @@ void setup() {
     delay(100);
   }
 
-  //Serial.begin(9600);
+  Serial.begin(9600);
   pinMode(13, OUTPUT);
-
+  Serial.println("Starting Bridge...");
   Bridge.begin();
+  Serial.println("Bridge Started");
+
   changeAllLedColors(0, 0, 0);
   delay(10);
   changeAllLedColors(100, 100, 100);
@@ -47,18 +49,7 @@ void setup() {
 
   delay(10000);//because we wait for the wifi to connect!!
 
-  mqtt.begin(MQTT_HOST, 1883);
-  mqtt.subscribe("oscola/23981479834/changeColor", colorChange);
-
-
-
-}
-
-void loop() {
-
-  mqtt.monitor();
-
-  Process wifiCheck;
+Process wifiCheck;
 
   wifiCheck.runShellCommand("/usr/bin/pretty-wifi-info.lua");
 
@@ -71,10 +62,21 @@ void loop() {
 
   delay(5000);
 
+  mqtt.begin(MQTT_HOST, 1883);
+  mqtt.subscribe("oscola/23981479834/changeColor", colorChange);
+
+
+
+}
+
+void loop() {
+
+  mqtt.monitor();
+
 }
 
 void colorChange(const String& topic, const String& subtopic, const String& message) {
-  //Serial.println(message);
+  Serial.println(message);
 
   digitalWrite(13, HIGH);
   delay(100);
