@@ -28,28 +28,48 @@ int delayval = 500; // delay for half a second
 int color[3] = {100, 100, 100}; //the Array that defines the color of the light
 
 void setup() {
+
   pixels.begin(); // This initializes the NeoPixel library.
   changeAllLedColors(0, 0, 0);
-
+  for (int i = 0; i < 100; i++) {
+    changeAllLedColors(i, i, i);
+    delay(100);
+  }
 
   //Serial.begin(9600);
   pinMode(13, OUTPUT);
 
   Bridge.begin();
-  delay(5000);
+  changeAllLedColors(0, 0, 0);
+  delay(10);
+  changeAllLedColors(100, 100, 100);
+
+
+  delay(10000);//because we wait for the wifi to connect!!
+
   mqtt.begin(MQTT_HOST, 1883);
   mqtt.subscribe("oscola/23981479834/changeColor", colorChange);
 
 
-  for (int i = 0; i < 100; i++) {
-    changeAllLedColors(i, i, i);
-    delay(10);
-  }
+
 }
 
 void loop() {
 
   mqtt.monitor();
+
+  Process wifiCheck;
+
+  wifiCheck.runShellCommand("/usr/bin/pretty-wifi-info.lua");
+
+  while (wifiCheck.available() > 0) {
+    char c = wifiCheck.read();
+    Serial.print(c);
+  }
+
+  Serial.println();
+
+  delay(5000);
 
 }
 
@@ -80,20 +100,20 @@ void hexColorConverter(String c) {
 
 
   String hexstring = c.substring(1);
-  
+
   //Serial.print(hexstring);
   //Serial.print("-");
-  
+
   long number = (long) strtol( &hexstring[0], NULL, 16);
   color[0] = number >> 16;
   color[1] = number >> 8 & 0xFF;
   color[2] = number & 0xFF;
 
-//  Serial.print(color[0]);
-//  Serial.print("-");
-//  Serial.print(color[1]);
-//  Serial.print("-");
-//  Serial.println(color[2]);
+  //  Serial.print(color[0]);
+  //  Serial.print("-");
+  //  Serial.print(color[1]);
+  //  Serial.print("-");
+  //  Serial.println(color[2]);
 
 }
 
