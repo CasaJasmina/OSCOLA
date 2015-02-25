@@ -1,0 +1,39 @@
+<html><head><title>&Ouml;SC&Ouml;LA Controller</title></head>
+<script src="./jquery.min.js"></script>
+<script type="text/javascript">
+var currentKeyCode = 0;
+function setColor (color) {
+	$.ajax({
+   		type: 'GET',
+  		url: 'http://arduino.local/mailbox/' + color // TODO: set local ip
+  		// Requires OscolaMailboxApi.ino running on the ÖSCÖLA Arduino Yún
+	});
+}
+function handleKeyDown (event) {
+	if (currentKeyCode != event.keyCode) { // debouncing
+		currentKeyCode = event.keyCode;
+		if (currentKeyCode == 87) { // 'w'
+			setColor('ff6600'); // orange
+		} else if (currentKeyCode == 65) { // 'a'
+			setColor('ffffff'); // white
+		} else if (currentKeyCode == 83) { // 's'
+   			setColor('a020f0'); // purple
+		} else if (currentKeyCode == 68) { // 'd'
+   			setColor('0000ff'); // blue
+		} else if (currentKeyCode == 49) { // '1'
+			setColor('ffff00'); // yellow
+		} else if (currentKeyCode == 50) { // '2'
+			setColor('ff0000'); // red
+		}
+	}
+}
+</script>
+<style>p { font-size:300%; color:white; }</style>
+<body bgcolor="000000" onkeydown="handleKeyDown(event)">
+	<table height="100%" width="100%"><tr><td align="center">
+		<p style="font-size:600%">&Ouml;SC&Ouml;LA Controller</p>
+		<p><a href="http://www.instructables.com/id/DIY-3D-Tilt-Sensor/">DIY 3D Tilt Sensor</a>, CC BY-SA @tamberg, controlling</p>
+		<p><a href="http://www.thingiverse.com/thing:695656">&Ouml;SC&Ouml;LA Piegata</a>, CC BY-SA @tamberg, derivative of</p><p><a href="https://github.com/CasaJasmina/OSCOLA/">&Ouml;SC&Ouml;LA</a>, CC&nbsp;BY-SA Jesse Howard, Stefano Paradiso &amp; Lorenzo Romagnoli</p>
+	</td></tr></table>
+</body>
+</html>
