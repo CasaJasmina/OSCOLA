@@ -1,4 +1,4 @@
-// lamp for arduino lamp workshop in torino on 20/21.2.2015 in
+// lamp for arduino lamp workshop in torino on 20/21.2.2015
 // fabian frei
 // fabian.frei@supsi.ch
 
