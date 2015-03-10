@@ -1,7 +1,7 @@
 # OSCOLA
 Open Source COnnected LAmp
 
-Oscola is a open source connected lamp designed for the first Casa Jasmina workshop by Jesse Howard, Stefano Paradiso and Lorenzo Romagnoli. 
+Oscola is a open source connected lamp designed for the first Casa Jasmina workshop by [Jesse Howard](http://www.jessehoward.net/), Stefano Paradiso and Lorenzo Romagnoli. 
 
 <img src="https://raw.githubusercontent.com/CasaJasmina/OSCOLA/master/oscola-small.jpg" width="600"/>
 
