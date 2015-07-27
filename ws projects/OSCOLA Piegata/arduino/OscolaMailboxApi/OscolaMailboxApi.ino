@@ -1,5 +1,6 @@
 // Control the OSCOLA connected lamp via the Arduino Yun Mailbox
-// REST API: Send HTTP GET http://OSCOLA_LOCAL_IP/mailbox/rrggbb
+// REST API: Try HTTP POST http://OSCOLA_LOCAL_IP/mailbox/rrggbb
+// For remote Web & SSH access see https://yaler.net/arduino-yun
 
 // Based on http://arduino.cc/en/Tutorial/MailboxReadMessage
 // and NeoPixel Ring simple sketch, Copyright (c) 2013, Shae Erisson
@@ -48,12 +49,10 @@ void setup() {
 
 void loop() {
   String message;
-  if (Mailbox.messageAvailable()) {
-    while (Mailbox.messageAvailable()) {
-      Mailbox.readMessage(message);
-      Serial.println(message);
-      convertHexColor(message);
-      setPixelsColor(color[0], color[1], color[2]);
-    }
+  while (Mailbox.messageAvailable()) {
+    Mailbox.readMessage(message);
+    Serial.println(message);
+    convertHexColor(message);
+    setPixelsColor(color[0], color[1], color[2]);
   }
 }
